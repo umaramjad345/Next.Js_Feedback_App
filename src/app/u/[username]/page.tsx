@@ -8,7 +8,6 @@ import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CardHeader, CardContent, Card } from "@/components/ui/card";
-import { useCompletion } from "ai/react";
 import {
   Form,
   FormControl,
@@ -38,15 +37,15 @@ export default function SendMessage() {
   const params = useParams<{ username: string }>();
   const username = params.username;
 
-  const {
-    complete,
-    completion,
-    isLoading: isSuggestLoading,
-    error,
-  } = useCompletion({
-    api: "/api/suggest-messages",
-    initialCompletion: initialMessageString,
-  });
+  // const {
+  //   complete,
+  //   completion,
+  //   isLoading: isSuggestLoading,
+  //   error,
+  // } = useCompletion({
+  //   api: "/api/suggest-messages",
+  //   initialCompletion: initialMessageString,
+  // });
 
   const form = useForm<z.infer<typeof messageSchema>>({
     resolver: zodResolver(messageSchema),
@@ -134,39 +133,6 @@ export default function SendMessage() {
         </form>
       </Form>
 
-      <div className="space-y-4 my-8">
-        <div className="space-y-2">
-          <Button
-            onClick={fetchSuggestedMessages}
-            className="my-4"
-            disabled={isSuggestLoading}
-          >
-            Suggest Messages
-          </Button>
-          <p>Click on any message below to select it.</p>
-        </div>
-        <Card>
-          <CardHeader>
-            <h3 className="text-xl font-semibold">Messages</h3>
-          </CardHeader>
-          <CardContent className="flex flex-col space-y-4">
-            {error ? (
-              <p className="text-red-500">{error.message}</p>
-            ) : (
-              parseStringMessages(completion).map((message, index) => (
-                <Button
-                  key={index}
-                  variant="outline"
-                  className="mb-2"
-                  onClick={() => handleMessageClick(message)}
-                >
-                  {message}
-                </Button>
-              ))
-            )}
-          </CardContent>
-        </Card>
-      </div>
       <Separator className="my-6" />
       <div className="text-center">
         <div className="mb-4">Get Your Message Board</div>

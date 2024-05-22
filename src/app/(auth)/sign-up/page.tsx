@@ -99,14 +99,11 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Join True Feedback
-          </h1>
-          <p className="mb-4">Sign up to start your anonymous adventure</p>
-        </div>
+    <div className="min-h-screen flex justify-center items-center">
+      <div className="max-w-xl w-full mx-auto my-6 p-6 shadow-2xl rounded-lg">
+        <h1 className="text-4xl font-semibold mb-4 mt-2 text-center text-blue-600">
+          Sign Up
+        </h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -114,7 +111,6 @@ export default function SignUpForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -122,6 +118,7 @@ export default function SignUpForm() {
                         field.onChange(e);
                         debouncedUsername(e.target.value);
                       }}
+                      placeholder="Username"
                     />
                   </FormControl>
                   {isCheckingUsername && <Loader2 className="animate-spin" />}
@@ -145,9 +142,8 @@ export default function SignUpForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} name="email" />
+                    <Input {...field} name="email" placeholder="Email" />
                   </FormControl>
                   <p className="text-muted text-gray-400 text-sm">
                     We will send you a verification code
@@ -162,9 +158,13 @@ export default function SignUpForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" {...field} name="password" />
+                    <Input
+                      type="password"
+                      {...field}
+                      name="password"
+                      placeholder="Password"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
