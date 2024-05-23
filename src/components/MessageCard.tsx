@@ -27,6 +27,7 @@ type MessageCardProps = {
 };
 
 export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
+  console.log(message._id);
   const { toast } = useToast();
 
   const handleDeleteConfirm = async () => {
@@ -64,14 +65,13 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  this message.
+                  This will permanently delete this message
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <AlertDialogAction onClick={handleDeleteConfirm}>
-                  Continue
+                  Delete
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

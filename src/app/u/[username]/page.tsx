@@ -37,38 +37,24 @@ export default function SendMessage() {
   const params = useParams<{ username: string }>();
   const username = params.username;
 
-  // const {
-  //   complete,
-  //   completion,
-  //   isLoading: isSuggestLoading,
-  //   error,
-  // } = useCompletion({
-  //   api: "/api/suggest-messages",
-  //   initialCompletion: initialMessageString,
-  // });
-
   const form = useForm<z.infer<typeof messageSchema>>({
     resolver: zodResolver(messageSchema),
   });
-
   const messageContent = form.watch("content");
-
   const handleMessageClick = (message: string) => {
     form.setValue("content", message);
   };
-
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: z.infer<typeof messageSchema>) => {
     setIsLoading(true);
     try {
-      const response = await axios.post<ApiResponse>("/api/send-message", {
+      const response = await axios.post<ApiResponse>("/api/send-messages", {
         ...data,
         username,
       });
-
       toast({
-        title: response.data.message,
+        title: response?.data?.message,
         variant: "default",
       });
       form.reset({ ...form.getValues(), content: "" });
@@ -77,7 +63,7 @@ export default function SendMessage() {
       toast({
         title: "Error",
         description:
-          axiosError.response?.data.message ?? "Failed to sent message",
+          axiosError.response?.data.message ?? "Failed to Send Message",
         variant: "destructive",
       });
     } finally {
@@ -85,19 +71,10 @@ export default function SendMessage() {
     }
   };
 
-  const fetchSuggestedMessages = async () => {
-    try {
-      complete("");
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-      // Handle error appropriately
-    }
-  };
-
   return (
-    <div className="container mx-auto my-8 p-6 bg-white rounded max-w-4xl">
+    <div className="max-w-4xl w-full container mx-auto my-8 p-6 bg-gray-800 bg-opacity-80 rounded-xl">
       <h1 className="text-4xl font-bold mb-6 text-center">
-        Public Profile Link
+        Public Feedback Page
       </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -120,13 +97,17 @@ export default function SendMessage() {
           />
           <div className="flex justify-center">
             {isLoading ? (
-              <Button disabled>
+              <Button disabled className="rounded-full">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
+                Please Wait
               </Button>
             ) : (
-              <Button type="submit" disabled={isLoading || !messageContent}>
-                Send It
+              <Button
+                type="submit"
+                disabled={isLoading || !messageContent}
+                className="rounded-full"
+              >
+                Send Message
               </Button>
             )}
           </div>

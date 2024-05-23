@@ -37,9 +37,9 @@ const UserSchema: Schema<User> = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, "Email is required"],
+    required: [true, "Email is Required"],
     unique: true,
-    match: [/.+\@.+\..+/, "Please use a valid email address"],
+    match: [/.+\@.+\..+/, "Please Provide a Valid Email Address"],
   },
   password: {
     type: String,
@@ -47,11 +47,11 @@ const UserSchema: Schema<User> = new mongoose.Schema({
   },
   verifyCode: {
     type: String,
-    required: [true, "Verify Code is required"],
+    required: [true, "Verify Code is Required"],
   },
   verifyCodeExpiry: {
     type: Date,
-    required: [true, "Verify Code Expiry is required"],
+    required: [true, "Verify Code Expiry is Required"],
   },
   isVerified: {
     type: Boolean,

@@ -22,17 +22,10 @@ function UserDashboard() {
   const [isSwitchLoading, setIsSwitchLoading] = useState<boolean>(false);
 
   const { toast } = useToast();
-
-  const handleDeleteMessage = (messageId: string) => {
-    setMessages(messages.filter((message) => message._id !== messageId));
-  };
-
   const { data: session } = useSession();
-
   const form = useForm({
     resolver: zodResolver(AcceptMessageSchema),
   });
-
   const { register, watch, setValue } = form;
   const acceptMessages = watch("acceptMessages");
 
@@ -47,7 +40,7 @@ function UserDashboard() {
         title: "Error",
         description:
           axiosError.response?.data.message ??
-          "Failed to fetch message settings",
+          "Failed to Update Accept Message Status",
         variant: "destructive",
       });
     } finally {
@@ -65,7 +58,7 @@ function UserDashboard() {
         if (refresh) {
           toast({
             title: "Refreshed Messages",
-            description: "Showing latest messages",
+            description: "Showing Latest Messages",
           });
         }
       } catch (error) {
@@ -84,16 +77,13 @@ function UserDashboard() {
     [setIsLoading, setMessages, toast]
   );
 
-  // Fetch initial state from the server
   useEffect(() => {
     if (!session || !session.user) return;
 
     fetchMessages();
-
     fetchAcceptMessages();
   }, [session, setValue, toast, fetchAcceptMessages, fetchMessages]);
 
-  // Handle switch change
   const handleSwitchChange = async () => {
     try {
       const response = await axios.post<ApiResponse>("/api/accept-messages", {
@@ -115,13 +105,15 @@ function UserDashboard() {
       });
     }
   };
+  const handleDeleteMessage = (messageId: string) => {
+    setMessages(messages.filter((message) => message._id !== messageId));
+  };
 
   if (!session || !session.user) {
     return <div></div>;
   }
 
   const { username } = session.user as User;
-
   const baseUrl = `${window.location.protocol}//${window.location.host}`;
   const profileUrl = `${baseUrl}/u/${username}`;
 
@@ -187,7 +179,7 @@ function UserDashboard() {
             />
           ))
         ) : (
-          <p>No messages to display.</p>
+          <p>No Messages Yet!</p>
         )}
       </div>
     </div>

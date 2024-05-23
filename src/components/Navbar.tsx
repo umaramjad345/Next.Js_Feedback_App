@@ -13,9 +13,10 @@ function Navbar() {
   return (
     <nav className="p-4 md:p-6 shadow-md bg-gray-900 text-white">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-        <a href="#" className="text-xl font-bold mb-4 md:mb-0">
-          True Feedback
-        </a>
+        <Link href="/" className="mb-4 md:mb-0">
+          <span className="text-2xl font-bold">Feeback</span>
+          <span className="text-2xl font-light">Sphere</span>
+        </Link>
         {session ? (
           <>
             <span className="mr-4">
@@ -26,7 +27,7 @@ function Navbar() {
               className="w-full md:w-auto bg-slate-100 text-black"
               variant="outline"
             >
-              Logout
+              LogOut
             </Button>
           </>
         ) : (

@@ -1,4 +1,4 @@
-// File: D:\Complete Web Development\GitHub\next.js_feedback_app\src\app\(auth)\sign-in\page.tsx
+// File: D:\Complete Web Development\Practice Projects\MERN Stack Projects\Next.js Projects\mystery_message_app\src\app\(auth)\sign-in\page.tsx
 import * as entry from '../../../../../src/app/(auth)/sign-in/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

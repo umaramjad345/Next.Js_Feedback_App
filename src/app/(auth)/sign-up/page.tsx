@@ -47,7 +47,7 @@ export default function SignUpForm() {
     const checkUsernameUnique = async () => {
       if (username) {
         setIsCheckingUsername(true);
-        setUsernameMessage(""); // Reset message
+        setUsernameMessage("");
         try {
           const response = await axios.get<ApiResponse>(
             `/api/check-username-unique?username=${username}`
@@ -99,9 +99,9 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <div className="max-w-xl w-full mx-auto my-6 p-6 shadow-2xl rounded-lg">
-        <h1 className="text-4xl font-semibold mb-4 mt-2 text-center text-blue-600">
+    <div className="min-h-screen flex justify-center items-center bg-red-100 bg-opacity-50">
+      <div className="max-w-lg w-full mx-auto my-6 p-6 shadow-2xl rounded-xl bg-white">
+        <h1 className="text-4xl font-semibold mb-4 mt-2 text-center text-black">
           Sign Up
         </h1>
         <Form {...form}>
@@ -118,6 +118,7 @@ export default function SignUpForm() {
                         field.onChange(e);
                         debouncedUsername(e.target.value);
                       }}
+                      className="rounded-full"
                       placeholder="Username"
                     />
                   </FormControl>
@@ -143,11 +144,13 @@ export default function SignUpForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} name="email" placeholder="Email" />
+                    <Input
+                      {...field}
+                      name="email"
+                      placeholder="Email"
+                      className="rounded-full"
+                    />
                   </FormControl>
-                  <p className="text-muted text-gray-400 text-sm">
-                    We will send you a verification code
-                  </p>
                   <FormMessage />
                 </FormItem>
               )}
@@ -163,6 +166,7 @@ export default function SignUpForm() {
                       type="password"
                       {...field}
                       name="password"
+                      className="rounded-full"
                       placeholder="Password"
                     />
                   </FormControl>
@@ -170,7 +174,11 @@ export default function SignUpForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              className="w-full rounded-full border-2 border-black hover:bg-transparent hover:text-black transition-all duration-300"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -184,8 +192,11 @@ export default function SignUpForm() {
         </Form>
         <div className="text-center mt-4">
           <p>
-            Already a member?{" "}
-            <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
+            Already Registered?{" "}
+            <Link
+              href="/sign-in"
+              className="ml-2 text-blue-600 hover:text-blue-800 hover:underline hover:underline-offset-4"
+            >
               Sign in
             </Link>
           </p>

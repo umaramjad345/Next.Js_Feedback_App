@@ -41,7 +41,7 @@ export default function SignInForm() {
       if (result.error === "CredentialsSignin") {
         toast({
           title: "Login Failed",
-          description: "Incorrect username or password",
+          description: "Incorrect Username/Password",
           variant: "destructive",
         });
       } else {
@@ -59,9 +59,9 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <div className="max-w-xl w-full mx-auto my-6 p-6 shadow-2xl rounded-lg">
-        <h1 className="text-4xl font-semibold mb-4 mt-2 text-center text-blue-600">
+    <div className="min-h-screen flex justify-center items-center bg-red-100 bg-opacity-50">
+      <div className="max-w-lg w-full mx-auto my-6 p-6 shadow-2xl rounded-xl bg-white">
+        <h1 className="text-4xl font-semibold mb-4 mt-2 text-center text-black">
           Sign In
         </h1>
         <Form {...form}>
@@ -71,7 +71,11 @@ export default function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <Input {...field} placeholder="Username/Email" />
+                  <Input
+                    {...field}
+                    placeholder="Email/Username"
+                    className="rounded-full"
+                  />
                   <FormMessage />
                 </FormItem>
               )}
@@ -85,22 +89,28 @@ export default function SignInForm() {
                     type="password"
                     {...field}
                     placeholder="Password"
-                    className="outline-none focus:outline-none"
+                    className="rounded-full"
                   />
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className="w-full" type="submit">
+            <Button
+              className="w-full rounded-full border-2 border-black hover:bg-transparent hover:text-black transition-all duration-300"
+              type="submit"
+            >
               Sign In
             </Button>
           </form>
         </Form>
         <div className="text-center mt-4">
           <p>
-            Don't have an Account?{" "}
-            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
-              Sign Up
+            Not Registered?
+            <Link
+              href="/sign-up"
+              className="ml-2 text-blue-600 hover:text-blue-800 hover:underline hover:underline-offset-4"
+            >
+              Sign up
             </Link>
           </p>
         </div>

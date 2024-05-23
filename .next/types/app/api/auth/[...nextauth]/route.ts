@@ -1,4 +1,4 @@
-// File: D:\Complete Web Development\GitHub\next.js_feedback_app\src\app\api\auth\[...nextauth]\route.ts
+// File: D:\Complete Web Development\Practice Projects\MERN Stack Projects\Next.js Projects\mystery_message_app\src\app\api\auth\[...nextauth]\route.ts
 import * as entry from '../../../../../../src/app/api/auth/[...nextauth]/route.js'
 import type { NextRequest } from 'next/server.js'
 
